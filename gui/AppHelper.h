@@ -23,7 +23,7 @@
 #define __APPHELPER_H__
 
 #include <boost/format.hpp>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <stdlib.h>
 #include <iostream>
 #include <unistd.h>
@@ -69,12 +69,12 @@ void add_image_file_filter_to_file_chooser_for_writing(Gtk::FileChooserDialog & 
  * Check if there are autosaved files in \p project_dir that are newer than the
  * normal project files.
  */
-bool check_for_autosaved_project(boost::filesystem::path const& project_dir);
+bool check_for_autosaved_project(std::filesystem::path const& project_dir);
 
 /**
  * Restore project files from the last autosaved project files.
  */
-void restore_autosaved_project(boost::filesystem::path const& project_dir);
+void restore_autosaved_project(std::filesystem::path const& project_dir);
 
 
 /**

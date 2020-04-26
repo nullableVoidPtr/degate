@@ -69,7 +69,7 @@ void GateRenderer::add_layer_type(Layer::LAYER_TYPE layer_type) {
 }
 
 void GateRenderer::set_gate_template(degate::GateTemplate_shptr tmpl)
-  throw(degate::InvalidPointerException) {
+  noexcept(false) {
 
   if(tmpl == NULL)
     throw InvalidPointerException("Invalid parameter for GateRenderer::set_gate_template().");

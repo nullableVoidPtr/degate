@@ -22,10 +22,10 @@
 #define BOOST_NO_SCOPED_ENUMS
 
 #include <AppHelper.h>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 using namespace degate;
-using namespace boost::filesystem;
+using namespace std::filesystem;
 
 std::string get_date_and_time_as_file_prefix() {
   time_t tim = time(NULL);
@@ -80,7 +80,7 @@ bool autosave_project(Project_shptr project, time_t interval) {
   return false;
 }
 
-bool check_for_autosaved_project(boost::filesystem::path const& project_dir) {
+bool check_for_autosaved_project(std::filesystem::path const& project_dir) {
 
   if(!is_symlink(project_dir / path(".project.xml")) ||
      !is_symlink(project_dir / path(".lmodel.xml")) ||
@@ -102,7 +102,7 @@ bool check_for_autosaved_project(boost::filesystem::path const& project_dir) {
   return false;
 }
 
-void restore_autosaved_project(boost::filesystem::path const& project_dir) {
+void restore_autosaved_project(std::filesystem::path const& project_dir) {
   if(exists(project_dir / path("project.xml"))) remove(project_dir / path("project.xml"));
   if(exists(project_dir / path("gate_library.xml"))) remove(project_dir / path("gate_library.xml"));
   if(exists(project_dir / path("lmodel.xml"))) remove(project_dir / path("lmodel.xml"));

@@ -31,8 +31,8 @@
 #include "Rectangle.h"
 
 #include <set>
+#include <filesystem>
 #include <boost/lexical_cast.hpp>
-#include <boost/filesystem.hpp>
 
 namespace degate {
 
@@ -202,7 +202,7 @@ namespace degate {
       }
 
       if(typeid(NewType) == typeid(std::string) ||
-	 typeid(NewType) == typeid(boost::filesystem::path)) {
+	 typeid(NewType) == typeid(std::filesystem::path)) {
 
 	return NewType(iter->second);
       }

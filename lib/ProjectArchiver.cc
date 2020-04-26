@@ -25,16 +25,15 @@
 #include <ProjectArchiver.h>
 #include <list>
 #include <memory>
+#include <filesystem>
 
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 
 
 using namespace std;
 using namespace degate;
-using namespace boost::filesystem;
+using namespace std::filesystem;
 
 void ProjectArchiver::add_single_file(struct zip * zip_archive,
 				      path const& archive_file,
@@ -82,12 +81,9 @@ void ProjectArchiver::add_directory(struct zip * zip_archive,
 
     if(is_directory(iter->path())) {
 
-#if BOOST_FILESYSTEM_VERSION==3
       std::string rel_dir = get_filename_from_path(stripped.native());
-#else
-      std::string rel_dir = get_filename_from_path(stripped.native_file_string());
-#endif
-      std::string pattern = "scaling_";
+
+	  std::string pattern = "scaling_";
       bool skip = rel_dir.length() >= pattern.length() && (rel_dir.compare(0, pattern.length(), pattern) == 0);
 
       if(!skip) {

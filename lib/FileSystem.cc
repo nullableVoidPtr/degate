@@ -31,35 +31,34 @@
 #include <dirent.h>
 #include <string.h>
 #include <limits.h>
+#include <filesystem>
 
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 #include <iostream>
 #include <string>
 
 using namespace degate;
-using namespace boost::filesystem;
+using namespace std::filesystem;
 
 /** @todo Instead of writing own wrapper functions, it would be better to
     use the boost filesystem abstraction.
 */
 
 bool degate::is_directory(std::string const & path) {
-  return boost::filesystem::is_directory(path);
+  return std::filesystem::is_directory(path);
 }
 
 bool degate::is_file(std::string const & path) {
-  return boost::filesystem::is_regular_file(path);
+  return std::filesystem::is_regular_file(path);
 }
 
 bool degate::is_symlink(std::string const & path) {
-  return boost::filesystem::is_symlink(path);
+  return std::filesystem::is_symlink(path);
 }
 
 bool degate::file_exists(std::string const & path) {
-  return boost::filesystem::exists(path);
+  return std::filesystem::exists(path);
 }
 
 std::string degate::get_basedir(std::string const & path) {
@@ -71,13 +70,13 @@ std::string degate::get_basedir(std::string const & path) {
 
     if(is_directory(resolved_path)) return resolved_path;
     else {
-      boost::filesystem::path p(path);
+      std::filesystem::path p(path);
       return p.parent_path().make_preferred().string();
     }
   }
   else {
     // treat it as a file name
-    boost::filesystem::path p(path);
+    std::filesystem::path p(path);
     return p.parent_path().make_preferred().string();
   }
 
@@ -85,7 +84,7 @@ std::string degate::get_basedir(std::string const & path) {
 
 
 std::string degate::get_realpath(std::string const& path) {
-  return boost::filesystem::canonical(path).make_preferred().string();
+  return std::filesystem::canonical(path).make_preferred().string();
 }
 
 
@@ -99,26 +98,26 @@ std::string degate::get_file_suffix(std::string const& path) {
 
 
 void degate::remove_file(std::string const& path) {
-  boost::filesystem::remove(path);
+  std::filesystem::remove(path);
 }
 
 void degate::remove_directory(std::string const& path) {
-  boost::filesystem::remove_all(path);
+  std::filesystem::remove_all(path);
 }
 
 void degate::create_directory(std::string const& directory) {
-  boost::filesystem::create_directory(directory);
+  std::filesystem::create_directory(directory);
 }
 
 std::string degate::create_temp_directory() {
-  boost::filesystem::path t(boost::filesystem::temp_directory_path() / boost::filesystem::unique_path());
+  std::filesystem::path t(std::filesystem::temp_directory_path() / std::tmpnam(nullptr));
   create_directory(t.string());
   return t.string();
 }
 
 
 std::string degate::generate_temp_file_pattern() {
-  boost::filesystem::path p(boost::filesystem::temp_directory_path() / boost::filesystem::path("temp.XXXXXXXX"));
+  std::filesystem::path p(std::filesystem::temp_directory_path() / std::filesystem::path("temp.XXXXXXXX"));
   return p.make_preferred().string();
 }
 
@@ -149,13 +148,13 @@ std::list<std::string> degate::read_directory(std::string const& path, bool pref
 
 
 std::string degate::join_pathes(std::string const& base_path, std::string const& extension_path) {
-  boost::filesystem::path p(base_path / extension_path);
+  std::filesystem::path p(std::filesystem::path(base_path) / std::filesystem::path(extension_path));
   return p.make_preferred().string();
 }
 
 
 std::string degate::get_filename_from_path(std::string const& path) {
-  boost::filesystem::path p(path);
+  std::filesystem::path p(path);
   return p.filename().string();
 }
 
@@ -168,23 +167,23 @@ std::string degate::get_basename(std::string const& path) {
   else return filename;
 }
 
-boost::filesystem::path
-naive_uncomplete(boost::filesystem::path const p, boost::filesystem::path const base) {
+std::filesystem::path
+naive_uncomplete(std::filesystem::path const p, std::filesystem::path const base) {
 
-    using boost::filesystem::path;
+    using std::filesystem::path;
 
-    boost::filesystem::canonical(p);
-    boost::filesystem::canonical(base);
+    std::filesystem::canonical(p);
+    std::filesystem::canonical(base);
 
     if (p == base)
         return "";
         /*!! this breaks stuff if path is a filename rather than a directory,
              which it most likely is... but then base shouldn't be a filename so... */
 
-    boost::filesystem::path from_path, from_base, output;
+    std::filesystem::path from_path, from_base, output;
 
-    boost::filesystem::path::iterator path_it = p.begin(),    path_end = p.end();
-    boost::filesystem::path::iterator base_it = base.begin(), base_end = base.end();
+    std::filesystem::path::iterator path_it = p.begin(),    path_end = p.end();
+    std::filesystem::path::iterator base_it = base.begin(), base_end = base.end();
 
     // check for emptiness
     if ((path_it == path_end) || (base_it == base_end))
@@ -229,7 +228,7 @@ naive_uncomplete(boost::filesystem::path const p, boost::filesystem::path const 
 
             // write to output, the remaining elements in path;
             // this is the path relative from the common root
-            boost::filesystem::path::iterator path_it_start = path_it;
+            std::filesystem::path::iterator path_it_start = path_it;
             for (; path_it != path_end; ++path_it) {
 
                 if (*path_it == _dot)
@@ -261,14 +260,14 @@ std::string degate::get_relative_path(std::string const& path,
 
 
 
-boost::filesystem::path degate::strip_path(boost::filesystem::path const& strip_from,
-   boost::filesystem::path const& strip_what) {
+std::filesystem::path degate::strip_path(std::filesystem::path const& strip_from,
+   std::filesystem::path const& strip_what) {
 
   path::iterator src_path_iter = strip_what.begin();
   path::iterator src_path_end = strip_what.end();
   path stripped;
 
-  BOOST_FOREACH(path s, strip_from) {
+  for (path s : strip_from) {
     if(src_path_iter != src_path_end && *src_path_iter == s)
       ++src_path_iter;
     else

@@ -63,7 +63,7 @@ public:
 
 
   void set_gate_template(degate::GateTemplate_shptr tmpl)
-    throw(degate::InvalidPointerException);
+    noexcept(false);
 
   void add_layer_type(degate::Layer::LAYER_TYPE layer_type1);
 
