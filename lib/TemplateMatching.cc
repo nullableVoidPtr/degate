@@ -30,7 +30,6 @@
 #include <DegateHelper.h>
 
 #include <utility>
-#include <boost/foreach.hpp>
 #include <math.h>
 
 using namespace degate;
@@ -258,17 +257,17 @@ void TemplateMatching::run() {
   set_progress_step_size(1.0/(tmpl_set.size() * tmpl_orientations.size()));
 
   /*
-  BOOST_FOREACH(GateTemplate_shptr tmpl, tmpl_set) {
-    BOOST_FOREACH(Gate::ORIENTATION orientation, tmpl_orientations) {
+  for(GateTemplate_shptr tmpl : tmpl_set) {
+    for(Gate::ORIENTATION orientation : tmpl_orientations) {
       add_task( run2, parameter)
     }
   }
 
   wait;
   */
-  BOOST_FOREACH(GateTemplate_shptr tmpl, tmpl_set) {
+  for(GateTemplate_shptr tmpl : tmpl_set) {
 
-    BOOST_FOREACH(Gate::ORIENTATION orientation, tmpl_orientations) {
+    for(Gate::ORIENTATION orientation : tmpl_orientations) {
 
       boost::format f("Check cell \"%1%\"");
       f % tmpl->get_name();
@@ -297,7 +296,7 @@ void TemplateMatching::run() {
 
   matches.sort(compare_correlation);
 
-  BOOST_FOREACH(match_found const& m, matches) {
+  for(match_found const& m : matches) {
     std::cout << "Try to insert gate of type " << m.tmpl->get_name() << " with corr="
 	      << m.correlation << " at " << m.x << "," << m.y << std::endl;
     if(add_gate(m.x, m.y, m.tmpl, m.orientation, m.correlation, m.t_hc))

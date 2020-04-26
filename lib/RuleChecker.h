@@ -47,10 +47,10 @@ namespace degate {
 
       clear_rc_violations();
 
-      BOOST_FOREACH(RCBase_shptr check, checks) {
+      for(RCBase_shptr check : checks) {
 	std::cout << "RC: " << check->get_rc_class_name() << std::endl;
 	check->run(lmodel);
-	BOOST_FOREACH(RCViolation_shptr violation, check->get_rc_violations()) {
+	for(RCViolation_shptr violation : check->get_rc_violations()) {
 	  add_rc_violation(violation);
 	}
       }

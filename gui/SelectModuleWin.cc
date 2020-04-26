@@ -32,7 +32,6 @@
 #include <set>
 
 #include <globals.h>
-#include <boost/foreach.hpp>
 
 using namespace degate;
 

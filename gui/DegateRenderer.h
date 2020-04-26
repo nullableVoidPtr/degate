@@ -33,7 +33,6 @@
 #include <map>
 #include <algorithm>
 #include <boost/tuple/tuple.hpp>
-#include <boost/foreach.hpp>
 
 #include <Editor.h>
 
@@ -149,7 +148,7 @@ public:
 
   virtual void clear_objects() {
     /*
-    BOOST_FOREACH(rendered_objects_type::value_type const & p, rendered_objects) {
+    for(rendered_objects_type::value_type const & p : rendered_objects) {
       p.second->remove();
     }
     rendered_objects.clear();
@@ -205,7 +204,7 @@ public:
 
   bool check_tile_is_present(unsigned int x, unsigned int y) const {
 
-    BOOST_FOREACH(bg_tiles_type const & t, rendered_bg_tiles) {
+    for(bg_tiles_type const & t : rendered_bg_tiles) {
       if(x == t.get<0>() && y == t.get<1>()) return true;
     }
 

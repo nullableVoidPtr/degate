@@ -2,7 +2,6 @@
 #include <LogicModelHelper.h>
 #include <Layer.h>
 
-#include <boost/foreach.hpp>
 
 using namespace degate;
 
@@ -36,7 +35,7 @@ void AutoNameGates::rename_gates(std::vector<unsigned int> const & histogram,
   unsigned int col_num = 0;
   unsigned int row_num = 0;
 
-  BOOST_FOREACH(int i, scan_lines) {
+  for(int i : scan_lines) {
 
     // naming = along-rows => histogram along y-axis, following scanlines along x-axis
 
@@ -61,7 +60,7 @@ void AutoNameGates::rename_gates(std::vector<unsigned int> const & histogram,
     else gate_list.sort(compare_min_y);
     
     // rename gates
-    BOOST_FOREACH(Gate_shptr gate, gate_list) {
+    for(Gate_shptr gate : gate_list) {
       boost::format f("%1%.%2%");
       f % row_num % col_num;
       gate->set_name(f.str());

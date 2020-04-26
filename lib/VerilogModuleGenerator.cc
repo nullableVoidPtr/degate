@@ -22,7 +22,6 @@
 
 #include <VerilogModuleGenerator.h>
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 #include <boost/algorithm/string/join.hpp>
 
 using namespace boost;
@@ -157,7 +156,7 @@ std::string VerilogModuleGenerator::generate_impl(std::string const& logic_class
 
 
   // genereate wire definitions
-  BOOST_FOREACH(net_names_table::value_type const& v, nets) {
+  for(net_names_table::value_type const& v : nets) {
     if(!mod->exists_module_port_name(v.second)) 
       wire_definitions += "  wire " + v.second + ";\n";
   }

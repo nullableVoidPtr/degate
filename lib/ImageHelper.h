@@ -31,7 +31,6 @@
 #include <Image.h>
 
 #include <set>
-#include <boost/foreach.hpp>
 
 namespace degate {
 
@@ -164,7 +163,7 @@ namespace degate {
     unsigned int w = img->get_width(), h = img->get_height();
     std::vector<double> i_tmp(4 * w * h);
 
-    BOOST_FOREACH(const std::shared_ptr<ImageType> i, images) {
+    for(const std::shared_ptr<ImageType> i : images) {
 
       // verify that all images have the same dimensions
       if(w != i->get_width() || h != i->get_height()) 

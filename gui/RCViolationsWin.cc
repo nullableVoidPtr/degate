@@ -200,7 +200,7 @@ void RCViolationsWin::run_checks(std::string filter_pattern) {
 
   RCVContainer remove_from_blacklist;
 
-  BOOST_FOREACH(RCViolation_shptr v, _blacklist) {
+  for(RCViolation_shptr v : _blacklist) {
     // check
     if(violations.contains(v)) {
       
@@ -211,7 +211,7 @@ void RCViolationsWin::run_checks(std::string filter_pattern) {
       remove_from_blacklist.push_back(v);
   }
 
-  BOOST_FOREACH(RCViolation_shptr v, remove_from_blacklist) {
+  for(RCViolation_shptr v : remove_from_blacklist) {
     _blacklist.erase(v);
   }
 
@@ -244,7 +244,7 @@ void RCViolationsWin::update_first_page() {
 
   RCVContainer const& violations = rc.get_rc_violations();
 
-  BOOST_FOREACH(RCViolation_shptr v, violations) {
+  for(RCViolation_shptr v : violations) {
     // check if violation is blacklisted
     if(v != NULL &&
        !_blacklist.contains(v) &&
@@ -374,7 +374,7 @@ void RCViolationsWin::on_ignore_button_clicked() {
 
     }
     
-    BOOST_FOREACH(Gtk::TreeIter & i, remove_things) {
+    for(Gtk::TreeIter & i : remove_things) {
       if(first_page)
 	refListStore->erase(i);
       else

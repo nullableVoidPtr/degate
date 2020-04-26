@@ -26,7 +26,6 @@
 #include <TangencyCheck.h>
 
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 
 using namespace degate;
 
@@ -424,7 +423,7 @@ void degate::merge_gate_images(LogicModel_shptr lmodel,
 
   std::list<GateTemplateImage_shptr> images;
 
-  BOOST_FOREACH(const Gate_shptr g, gates) {
+  for(const Gate_shptr g : gates) {
 
     GateTemplateImage_shptr tmpl_img =
       grab_image<GateTemplateImage>(lmodel, layer, g->get_bounding_box());
@@ -464,7 +463,7 @@ void degate::merge_gate_images(LogicModel_shptr lmodel,
   typedef std::map<object_id_t, std::list<Gate_shptr> > gate_sets_type;
   gate_sets_type gate_sets;
 
-  BOOST_FOREACH(PlacedLogicModelObject_shptr plo, gates) {
+  for(PlacedLogicModelObject_shptr plo : gates) {
     if(Gate_shptr gate = std::dynamic_pointer_cast<Gate>(plo)) {
       GateTemplate_shptr tmpl = gate->get_gate_template();
       if(tmpl) // ignore gates, that have no standard cell
@@ -476,7 +475,7 @@ void degate::merge_gate_images(LogicModel_shptr lmodel,
    * Iterate over layers.
    */
 
-  BOOST_FOREACH(Layer_shptr layer, get_available_standard_layers(lmodel)) {
+  for(Layer_shptr layer : get_available_standard_layers(lmodel)) {
 
     /*
      * Iterate over standard cell classes.
@@ -495,7 +494,7 @@ void degate::merge_gate_images(LogicModel_shptr lmodel,
 
 void degate::remove_entire_net(LogicModel_shptr lmodel, Net_shptr net) {
 
-  BOOST_FOREACH(object_id_t oid, *net) {
+  for(object_id_t oid : *net) {
     PlacedLogicModelObject_shptr plo = lmodel->get_object(oid);
     assert(plo != NULL);
     if(ConnectedLogicModelObject_shptr clmo = 

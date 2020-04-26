@@ -22,7 +22,6 @@
 
 #include <VHDLTBCodeTemplateGenerator.h>
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 #include <boost/algorithm/string/join.hpp>
 
 using namespace boost;
@@ -43,8 +42,8 @@ std::string VHDLTBCodeTemplateGenerator::generate() const {
   tb_entity_name += entity_name;
 
   port_map_type port_map;
-  BOOST_FOREACH(std::string const& port_name, get_inports()) port_map[port_name] = port_name;
-  BOOST_FOREACH(std::string const& port_name, get_outports()) port_map[port_name] = port_name;
+  for(std::string const& port_name : get_inports()) port_map[port_name] = port_name;
+  for(std::string const& port_name : get_outports()) port_map[port_name] = port_name;
 
 
   std::string clock_process_impl;

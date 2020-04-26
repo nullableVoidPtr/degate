@@ -23,7 +23,6 @@
 #include <Wire.h>
 #include <Via.h>
 
-#include <boost/foreach.hpp>
 
 using namespace degate;
 using namespace std;
@@ -66,7 +65,7 @@ void degate::push_changes_to_server(std::string const& server_url, LogicModel_sh
     }
   }
 
-  BOOST_FOREACH(object_id_t id, lmodel->get_removed_remote_objetcs_list()) {
+  for(object_id_t id : lmodel->get_removed_remote_objetcs_list()) {
     xmlrpc_c::paramList params;
     params.add(xmlrpc_c::value_string("remove"));
     params.add(xmlrpc_c::value_int(id));

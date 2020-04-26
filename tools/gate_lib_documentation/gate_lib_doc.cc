@@ -102,7 +102,7 @@ int execute_command(std::string const& command, std::list<std::string> const& pa
     std::cout << "Execute command " << command << " ";
     char const ** argv = new char const *[params.size()+2];
     int i = 1;
-    BOOST_FOREACH(std::string const& s, params) {
+    for(std::string const& s : params) {
       argv[i] = s.c_str();
       i++;
       std::cout << s << " ";
@@ -131,7 +131,7 @@ int execute_command(std::string const& command, std::list<std::string> const& pa
     else {
       if(WEXITSTATUS(exit_code) != 0) {
         std::string errmsg("Failed to execute command: " + command);
-        BOOST_FOREACH(std::string const& s, params) {
+        for(std::string const& s : params) {
           errmsg += " ";
           errmsg += s;
         }
@@ -186,7 +186,7 @@ std::string subsubsection(std::string const& name) {
 std::string table_start(std::list<std::string> const& tbl_header) {
 
   std::list<std::string> prepared_tbl_header;
-  BOOST_FOREACH(std::string const& s, tbl_header) {
+  for(std::string const& s : tbl_header) {
     std::string s2("\\textbf{");
     s2 += s + "}";
     prepared_tbl_header.push_back(s2);
@@ -212,7 +212,7 @@ std::string table_end() {
 
 std::string table_add_line(std::list<std::string> const& entry) {
   std::list<std::string> prepared_tbl_header;
-  BOOST_FOREACH(std::string const& s, entry) {
+  for(std::string const& s : entry) {
     prepared_tbl_header.push_back(s);
   }
 

@@ -36,7 +36,6 @@
 #include <list>
 
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 
 using namespace std;
 using namespace degate;
@@ -68,7 +67,7 @@ void LogicModelImporter::import_into(LogicModel_shptr lmodel,
     parse_logic_model_element(root_elem, lmodel);
 
     // check if the ports of placed standard cell are available and create them if necessary
-    BOOST_FOREACH(Gate_shptr g, gates) {
+    for(Gate_shptr g : gates) {
       lmodel->update_ports(g);
     }
 
@@ -531,7 +530,7 @@ std::list<Module_shptr> LogicModelImporter::parse_modules_element(const xmlpp::E
       const xmlpp::Element * sub_modules_elem = get_dom_twig(module_elem, "modules");
       if(sub_modules_elem != NULL) {
 	std::list<Module_shptr> sub_modules = parse_modules_element(sub_modules_elem, lmodel);
-	BOOST_FOREACH(Module_shptr submod, sub_modules) module->add_module(submod);
+	for(Module_shptr submod : sub_modules) module->add_module(submod);
       }
 
 

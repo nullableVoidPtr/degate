@@ -709,7 +709,7 @@ void DegateRenderer::render_background() {
 
 void DegateRenderer::drop_tiles() {
 
-  BOOST_FOREACH(bg_tiles_type const & t, rendered_bg_tiles) {
+  for(bg_tiles_type const & t : rendered_bg_tiles) {
     GLuint i = t.get<2>();
     std::cout << "delete texture with id " << i << std::endl;
     //glDeleteTextures(1, &i);

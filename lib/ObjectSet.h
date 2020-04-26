@@ -26,7 +26,6 @@
 #include <set>
 #include <list>
 #include <memory>
-#include <boost/foreach.hpp>
 
 namespace degate {
 
@@ -78,7 +77,7 @@ namespace degate {
     bool check_for_all(bool (*check_function)(PlacedLogicModelObject_shptr)) const {
       if(empty()) return false;
 
-      BOOST_FOREACH(PlacedLogicModelObject_shptr o, objects) {
+      for(PlacedLogicModelObject_shptr o : objects) {
 	if(check_function(o) == false) return false;
       }
       return true;

@@ -27,7 +27,6 @@
 #include <cctype>
 
 #include <VHDLCodeTemplateGenerator.h>
-#include <boost/foreach.hpp>
 
 namespace degate {
 

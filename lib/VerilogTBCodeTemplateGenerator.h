@@ -27,7 +27,6 @@
 #include <cctype>
 
 #include <VerilogCodeTemplateGenerator.h>
-#include <boost/foreach.hpp>
 
 namespace degate {
 

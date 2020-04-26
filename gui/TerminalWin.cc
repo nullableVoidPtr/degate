@@ -28,7 +28,6 @@
 
 #include <iostream>
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 #include <boost/algorithm/string/join.hpp>
 
 
@@ -97,7 +96,7 @@ void TerminalWin::exec_program(std::list<std::string> cmd) {
 
   cmd_state = RUNNING;
 
-  BOOST_FOREACH(std::string const& s, cmd) {
+  for(std::string const& s : cmd) {
     std::cout << "[" << s << "]" << std::endl;
   }
 

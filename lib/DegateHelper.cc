@@ -7,7 +7,6 @@
 #include <iostream>
 #include <fstream>
 
-#include <boost/foreach.hpp>
 
 using namespace degate;
 using namespace std;

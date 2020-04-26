@@ -22,7 +22,6 @@
 
 #include <VHDLCodeTemplateGenerator.h>
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 #include <boost/algorithm/string/join.hpp>
 
 using namespace boost;
@@ -199,7 +198,7 @@ std::string VHDLCodeTemplateGenerator::generate_identifier(std::string const& na
   std::string identifier = prefix;
 
   bool first_char = true;
-  BOOST_FOREACH(char c, name) {
+  for(char c : name) {
     if(c == '/' || c == '!') identifier.append("not");
     else if(first_char && !isalpha(c)) {
       //identifier.append("entity_");
@@ -220,7 +219,7 @@ std::string VHDLCodeTemplateGenerator::generate_instance(std::string const& inst
 
   std::list<std::string> port_map_str;
 
-  BOOST_FOREACH(port_map_type::value_type p, port_map) {
+  for(port_map_type::value_type p : port_map) {
     boost::format m("    %1% => %2%");
     m % generate_identifier(p.first) % generate_identifier(p.second);
     port_map_str.push_back(m.str());

@@ -32,7 +32,6 @@
 #include <freetype/ftoutln.h>
 #include <freetype/fttrigon.h>
 
-#include <boost/foreach.hpp>
 #include <iostream>
 
 using namespace degate;
@@ -424,7 +423,7 @@ void OpenGLRendererBase::FontRenderingHelper::draw_string(int x, int y,
 
     unsigned int string_width = 0;
 
-    BOOST_FOREACH(unsigned char c, str) {
+    for(unsigned char c : str) {
       string_width += glyph_width[(int)c];
     }
 

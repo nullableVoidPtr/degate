@@ -1775,7 +1775,7 @@ void MainWin::on_menu_logic_remove_entire_net() {
 
 
     std::set<Net_shptr> l;
-    BOOST_FOREACH(PlacedLogicModelObject_shptr plo, selected_objects) {
+    for(PlacedLogicModelObject_shptr plo : selected_objects) {
       if(ConnectedLogicModelObject_shptr clo = 
 	 std::dynamic_pointer_cast<ConnectedLogicModelObject>(plo)) {
 	if(clo->is_connected()) l.insert(clo->get_net());
@@ -1788,7 +1788,7 @@ void MainWin::on_menu_logic_remove_entire_net() {
       return;
     }
 
-    BOOST_FOREACH(Net_shptr net, l)
+    for(Net_shptr net : l)
       remove_entire_net(main_project->get_logic_model(), net);
 
     if(l.size() > 0) {

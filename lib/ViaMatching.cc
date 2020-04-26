@@ -24,7 +24,6 @@
 #include <MedianFilter.h>
 #include <EdgeDetection.h>
 #include <LogicModelHelper.h>
-#include <boost/foreach.hpp>
 
 using namespace degate;
 
@@ -272,7 +271,7 @@ void ViaMatching::scan(BoundingBox const& bbox, BackgroundImage_shptr bg_img,
   }
 
   matches.sort(compare_correlation);
-  BOOST_FOREACH(match_found const& m, matches) {
+  for(match_found const& m : matches) {
     add_via(m.x, m.y, via_diameter, direction, m.correlation, threshold_match);
   }
 

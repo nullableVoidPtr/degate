@@ -39,7 +39,7 @@ GateRenderer::GateRenderer() : realized(false) {
 
 GateRenderer::~GateRenderer() {
 
-  BOOST_FOREACH(layer_list_type::value_type & p, layers)
+  for(layer_list_type::value_type & p : layers)
     if(glIsTexture(p.second) == GL_TRUE) glDeleteTextures(1, &p.second);
 }
 
@@ -259,7 +259,7 @@ void GateRenderer::render_gate_template(degate::GateTemplate_shptr tmpl,
 
   bool first = true;
 
-  BOOST_FOREACH(layer_list_type::value_type & p, layers) {
+  for(layer_list_type::value_type & p : layers) {
     Layer::LAYER_TYPE layer_type = p.first;
     if(tmpl->has_image(p.first)) {
       GateTemplateImage_shptr img = tmpl->get_image(layer_type);
@@ -279,7 +279,7 @@ void GateRenderer::render_gate_template(degate::GateTemplate_shptr tmpl,
 
 
   first = true;
-  BOOST_FOREACH(layer_list_type::value_type const & p, layers) {
+  for(layer_list_type::value_type const & p : layers) {
     if(tmpl->has_image(p.first) && glIsTexture(p.second) == GL_TRUE) {
       GateTemplateImage_shptr img = tmpl->get_image(p.first);
 

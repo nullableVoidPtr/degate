@@ -27,7 +27,6 @@
 #include <cctype>
 
 #include <CodeTemplateGenerator.h>
-#include <boost/foreach.hpp>
 
 namespace degate {
 

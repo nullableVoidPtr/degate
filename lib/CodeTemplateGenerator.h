@@ -27,7 +27,6 @@
 #include <vector>
 #include <string>
 
-#include <boost/foreach.hpp>
 
 namespace degate {
 
@@ -99,7 +98,7 @@ namespace degate {
     template<typename Container>
     Container generate_identifier(Container const& c, std::string const& prefix = "") const {
       Container new_c;
-      BOOST_FOREACH(typename Container::value_type const& s, c) {
+      for(typename Container::value_type const& s : c) {
 	new_c.push_back(generate_identifier(s, prefix));
       }
       return new_c;

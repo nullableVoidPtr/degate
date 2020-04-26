@@ -28,7 +28,6 @@
 #include <set>
 #include <algorithm>
 #include <boost/tuple/tuple.hpp>
-#include <boost/foreach.hpp>
 
 #include <Editor.h>
 #include <Image.h>

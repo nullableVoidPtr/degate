@@ -22,7 +22,6 @@
 
 #include <degate.h>
 #include <Module.h>
-#include <boost/foreach.hpp>
 #include <boost/algorithm/string.hpp>
 
 #include <iterator>
@@ -347,9 +346,9 @@ void Module::determine_module_ports() {
   
 
   // check sub-modules
-  BOOST_FOREACH(Module_shptr sub, modules) {
+  for(Module_shptr sub : modules) {
     
-    BOOST_FOREACH(port_collection::value_type const& p, sub->ports) {
+    for(port_collection::value_type const& p : sub->ports) {
       std::string mod_port_name = p.first;
       GatePort_shptr gate_port = p.second;
       Net_shptr net = gate_port->get_net();
@@ -494,7 +493,7 @@ Module_shptr Module::lookup_module(std::list<std::string> & path_elements) const
   
   if(path_elements.size() > 0) {
 
-    BOOST_FOREACH(Module_shptr m, modules) {
+    for(Module_shptr m : modules) {
 
       if(m->get_name() == path_elements.front()) {
 

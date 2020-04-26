@@ -34,7 +34,6 @@
 #include <filesystem>
 
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 #include <iostream>
 #include <string>
 
@@ -267,7 +266,7 @@ std::filesystem::path degate::strip_path(std::filesystem::path const& strip_from
   path::iterator src_path_end = strip_what.end();
   path stripped;
 
-  for (path s : strip_from) {
+  for(path s : strip_from) {
     if(src_path_iter != src_path_end && *src_path_iter == s)
       ++src_path_iter;
     else

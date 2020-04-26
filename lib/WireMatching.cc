@@ -26,7 +26,6 @@
 #include <BoundingBox.h>
 #include <LineSegmentExtraction.h>
 #include <MedianFilter.h>
-#include <boost/foreach.hpp>
 
 using namespace degate;
 
@@ -97,7 +96,7 @@ void WireMatching::run() {
   assert(lmodel != NULL);
   assert(layer != NULL);
 
-  BOOST_FOREACH(LineSegment_shptr ls, *line_segments) {
+  for(LineSegment_shptr ls : *line_segments) {
     Wire_shptr w(new Wire(bounding_box.get_min_x() + ls->get_from_x(),
 			  bounding_box.get_min_y() + ls->get_from_y(),
 			  bounding_box.get_min_x() + ls->get_to_x(),

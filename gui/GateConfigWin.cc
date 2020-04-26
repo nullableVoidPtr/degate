@@ -39,7 +39,6 @@ along with degate. If not, see <http://www.gnu.org/licenses/>.
 
 #include "GateTemplate.h"
 #include <boost/format.hpp>
-#include <boost/foreach.hpp>
 
 using namespace degate;
 using namespace boost;
@@ -572,7 +571,7 @@ void GateConfigWin::on_ok_button_clicked() {
   gate_template->set_logic_class(selected_logic_class);
 
 
-  BOOST_FOREACH(code_text_map_type::value_type &p, code_text)
+  for(code_text_map_type::value_type &p : code_text)
     gate_template->set_implementation(p.first, p.second);
 
   get_dialog()->hide();

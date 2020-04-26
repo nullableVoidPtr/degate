@@ -53,7 +53,7 @@ void RCVBlacklistExporter::export_data(std::string const& filename,
     xmlpp::Element * root_elem = doc.create_root_node("rc-blacklist");
     assert(root_elem != NULL);
 
-    BOOST_FOREACH(RCViolation_shptr rcv, violations) {
+    for(RCViolation_shptr rcv : violations) {
       add_rcv(root_elem, rcv);
     }
 

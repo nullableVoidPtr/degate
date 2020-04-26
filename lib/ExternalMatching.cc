@@ -93,7 +93,7 @@ void ExternalMatching::run() {
     debug(TM, "system() failed");
   }
   else {
-    BOOST_FOREACH(PlacedLogicModelObject_shptr plo,
+    for(PlacedLogicModelObject_shptr plo : 
 		  parse_file(results_file)) {
       lmodel->add_object(layer, plo);
     }

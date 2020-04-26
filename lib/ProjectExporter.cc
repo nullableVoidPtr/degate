@@ -39,7 +39,6 @@
 #include <stdexcept>
 #include <list>
 #include <memory>
-#include <boost/foreach.hpp>
 
 using namespace std;
 using namespace degate;
@@ -249,7 +248,7 @@ void ProjectExporter::add_colors(xmlpp::Element* prj_elem, Project_shptr prj) {
   if(colors_elem == NULL) throw(std::runtime_error("Failed to create node."));
 
   default_colors_t default_colors = prj->get_default_colors();
-  BOOST_FOREACH(default_colors_t::value_type const& p, default_colors) {
+  for(default_colors_t::value_type const& p : default_colors) {
     xmlpp::Element* color_elem = colors_elem->add_child("color");
     if(color_elem == NULL) throw(std::runtime_error("Failed to create node."));
 
