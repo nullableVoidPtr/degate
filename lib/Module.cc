@@ -524,14 +524,14 @@ void Module::set_module_port_name(std::string const& module_port_name, GatePort_
 }
 
 
-boost::optional<std::string> Module::lookup_module_port_name(GatePort_shptr gate_port) {
+std::optional<std::string> Module::lookup_module_port_name(GatePort_shptr gate_port) {
   
   for(Module::port_collection::const_iterator iter = ports.begin(); iter != ports.end(); ++iter) {
     if(iter->second == gate_port) {
-      return boost::optional<std::string>(iter->first);
+      return std::optional<std::string>(iter->first);
     }
   }
-  return boost::optional<std::string>();
+  return std::optional<std::string>();
 }
 
 

@@ -119,7 +119,7 @@ std::string VerilogModuleGenerator::generate_impl(std::string const& logic_class
 	const Net_shptr net = gport->get_net();
 	
 	// first, check if the gate port is directly adjacent to a module port
-	boost::optional<std::string> is_module_port = mod->lookup_module_port_name(gport);
+	std::optional<std::string> is_module_port = mod->lookup_module_port_name(gport);
 	if(is_module_port) {
 	  nets[net->get_object_id()] = *is_module_port;
 	}

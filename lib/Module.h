@@ -25,10 +25,10 @@
 
 #include <map>
 #include <memory>
+#include <optional>
 
 #include <LogicModelObjectBase.h>
 #include <LogicModel.h>
-#include <boost/optional.hpp>
 
 namespace degate {
 
@@ -229,7 +229,7 @@ namespace degate {
      * @return Returns the module port name.
      */
 
-    boost::optional<std::string> lookup_module_port_name(GatePort_shptr gate_port);
+    std::optional<std::string> lookup_module_port_name(GatePort_shptr gate_port);
 
   private:
 
